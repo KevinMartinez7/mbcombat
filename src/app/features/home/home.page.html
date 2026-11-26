@@ -51,27 +51,6 @@
     </div>
   </section>
 
-  <section class="community-section" id="nosotros" aria-labelledby="community-title">
-    <div class="page-container community-layout">
-      <div class="community-copy">
-        <p class="eyebrow"><span></span> MIGUEL BADONE COMBAT TEAM</p>
-        <h2 id="community-title">UN MISMO LUGAR.<br><em>CUATRO FORMAS DE ENTRENAR.</em></h2>
-        <p>Miguel Badone reúne Muay Thai, MMA, entrenamiento con paos y sesiones personalizadas en un mismo espacio. Cada propuesta tiene su propio enfoque y acompañamiento técnico.</p>
-        <p>Explorá las opciones y consultá a Miguel para encontrar por dónde empezar.</p>
-        <a class="text-link" href="#disciplinas">CONOCÉ LAS ACADEMIAS <span aria-hidden="true">↗</span></a>
-      </div>
-      <div class="community-mosaic" id="galeria" aria-label="Imágenes ilustrativas de distintas disciplinas de combate">
-        @for (discipline of disciplines; track discipline.slug) {
-          <figure class="community-photo" [style.--accent]="discipline.accent">
-            <img [src]="discipline.homeImage" alt="" loading="lazy" />
-            <figcaption>{{ discipline.name }}</figcaption>
-          </figure>
-        }
-        <span class="community-disclaimer">IMÁGENES ILUSTRATIVAS · NO CORRESPONDEN AL GIMNASIO</span>
-      </div>
-    </div>
-  </section>
-
   <section class="schedule-section" id="horarios" aria-labelledby="schedule-title">
     <div class="page-container">
       <div class="schedule-header">

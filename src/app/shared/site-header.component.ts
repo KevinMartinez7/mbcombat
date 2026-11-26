@@ -34,7 +34,6 @@ import { DISCIPLINES } from '../core/disciplines.data';
             </div>
           </div>
           <a routerLink="/" fragment="horarios" (click)="closeMenu()">Horarios</a>
-          <a routerLink="/" fragment="nosotros" (click)="closeMenu()">Nosotros</a>
           <a routerLink="/articulos" (click)="closeMenu()">Artículos</a>
           <a routerLink="/eventos" (click)="closeMenu()">Eventos</a>
           <a routerLink="/vlog" (click)="closeMenu()">Vlog</a>
