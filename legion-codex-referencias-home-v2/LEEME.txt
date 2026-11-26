@@ -1,0 +1,3 @@
+COPIAR LA CARPETA docs/ AL DIRECTORIO RAIZ DE TU PROYECTO ANGULAR.
+Luego pasarle a Codex el prompt de ChatGPT, indicandole que lea docs/diseno/BRIEF-HOME-V2.md y las imagenes dentro de docs/diseno/referencias/.
+Las imagenes generadas por IA son SOLO referencias de composicion, no recursos oficiales.

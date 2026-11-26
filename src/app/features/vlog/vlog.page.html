@@ -1,0 +1,70 @@
+<app-site-header />
+
+<main class="vlog-page">
+  <section class="vlog-intro" aria-labelledby="vlog-title">
+    <div class="page-container vlog-intro-inner">
+      <div>
+        <p class="vlog-eyebrow"><span></span> MIGUEL BADONE COMBAT TEAM · DIARIO DE EQUIPO</p>
+        <h1 id="vlog-title">VLOG<br><em>DE COMBATE.</em></h1>
+        <p class="vlog-lede">El camino de un peleador no empieza cuando sube al ring. Acá compartimos el gym, la preparación, los viajes y todo lo que pasa detrás de cada evento.</p>
+      </div>
+      <div class="vlog-intro-stamp"><span>DESDE ADENTRO</span><strong>ENTRENAR.<br>VIAJAR.<br>COMPETIR.</strong></div>
+    </div>
+  </section>
+
+  <section class="vlog-content page-container">
+    <article class="vlog-featured" aria-live="polite">
+      <div class="vlog-featured-media">
+        <img [src]="selectedStory().image" [alt]="'Imagen ilustrativa de ' + selectedStory().title" />
+        <div class="vlog-media-shade" aria-hidden="true"></div>
+        <span class="vlog-media-label">{{ selectedStory().status }}</span>
+        <span class="vlog-play" aria-hidden="true">▶</span>
+      </div>
+      <div class="vlog-featured-copy">
+        <p class="vlog-kicker">{{ selectedStory().dateLabel }}</p>
+        <h2>{{ selectedStory().title }}</h2>
+        <p>{{ selectedStory().description }}</p>
+        <div class="vlog-featured-meta"><span>{{ selectedStory().categoryLabel }}</span><span>{{ selectedStory().duration }} MIN</span></div>
+        <p class="vlog-upload-note"><span></span> Este espacio queda listo para sumar el video cuando esté publicado.</p>
+      </div>
+    </article>
+
+    <div class="vlog-filter-heading">
+      <div><p class="vlog-eyebrow"><span></span> ELEGÍ UNA HISTORIA</p><h2>EL CAMINO<br><em>SE CUENTA.</em></h2></div>
+      <p>Filtrá el diario por el momento que quieras conocer: el trabajo del gym, la preparación, los viajes o la noche del evento.</p>
+    </div>
+    <div class="vlog-filters" role="tablist" aria-label="Filtrar historias del vlog">
+      @for (filter of filters; track filter.value) {
+        <button type="button" role="tab" [attr.aria-selected]="activeFilter() === filter.value" [class.is-active]="activeFilter() === filter.value" (click)="setFilter(filter.value)">{{ filter.label }}</button>
+      }
+    </div>
+
+    <div class="vlog-grid">
+      @for (story of visibleStories(); track story.id) {
+        <button type="button" class="vlog-card" [class.is-selected]="selectedStoryId() === story.id" (click)="selectStory(story)">
+          <span class="vlog-card-media"><img [src]="story.image" [alt]="'Imagen ilustrativa de ' + story.title" loading="lazy" /><span class="vlog-card-play" aria-hidden="true">▶</span><span class="vlog-card-duration">{{ story.duration }}</span></span>
+          <span class="vlog-card-copy"><small>{{ story.categoryLabel }}</small><strong>{{ story.title }}</strong><span>{{ story.description }}</span></span>
+        </button>
+      } @empty {
+        <p class="vlog-empty">Todavía no hay historias cargadas en esta categoría.</p>
+      }
+    </div>
+
+    <section class="vlog-socials" aria-labelledby="vlog-socials-title">
+      <div class="vlog-socials-heading"><p class="vlog-eyebrow"><span></span> SEGUÍ CADA CAMINO</p><h2 id="vlog-socials-title">REDES DE <em>CADA DISCIPLINA.</em></h2><p>El Vlog muestra el camino completo. En las redes de cada disciplina encontrás el día a día, las novedades y las próximas clases.</p></div>
+      <div class="vlog-social-grid">
+        @for (social of socials; track social.name) {
+          <article class="vlog-social-card" [style.--social-accent]="social.accent">
+            <img [src]="social.image" [alt]="'Imagen ilustrativa de ' + social.name" loading="lazy" />
+            <div class="vlog-social-shade" aria-hidden="true"></div>
+            <div class="vlog-social-copy"><small>{{ social.discipline }}</small><h3>{{ social.name }}</h3><p>{{ social.description }}</p>@if (social.url) { <a [href]="social.url" target="_blank" rel="noopener noreferrer">{{ social.action }} <span aria-hidden="true">↗</span></a> } @else { <span class="social-pending">{{ social.action }}</span> }</div>
+          </article>
+        }
+      </div>
+    </section>
+
+    <section class="vlog-join"><span class="vlog-join-mark" aria-hidden="true">+</span><div><p class="vlog-eyebrow"><span></span> ¿TENÉS MATERIAL?</p><h2>SUMEMOS TU <em>HISTORIA.</em></h2><p>Si entrenás, viajás o competís con el equipo, escribile a Miguel para compartir material y coordinar la próxima publicación.</p></div><a class="vlog-join-link" href="https://wa.me/5492494381035?text=Hola%20Miguel%2C%20quiero%20compartir%20material%20para%20el%20Vlog%20del%20equipo." target="_blank" rel="noopener noreferrer">ESCRIBIR POR WHATSAPP</a></section>
+  </section>
+</main>
+
+<app-site-footer />

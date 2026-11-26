@@ -1,0 +1,106 @@
+<app-site-header />
+
+<main class="events-page">
+  <section class="events-intro" aria-labelledby="events-title">
+    <div class="page-container events-intro-inner">
+      <div>
+        <p class="events-eyebrow"><span></span> MIGUEL BADONE COMBAT TEAM · CARTELERAS LOCALES</p>
+        <h1 id="events-title">EVENTOS DE<br><em>COMBATE.</em></h1>
+        <p class="events-lede">SeguÍ el calendario de encuentros, exhibiciones y jornadas donde nuestros atletas ponen en práctica todo lo entrenado.</p>
+      </div>
+      <div class="events-intro-note"><strong>UNA FECHA.<br>MUCHAS HISTORIAS.</strong><span>Muay Thai · MMA · Exhibiciones</span></div>
+    </div>
+  </section>
+
+  <section class="events-content page-container" aria-label="Calendario de eventos">
+    <article class="event-spotlight">
+      <div class="spotlight-image">
+        <img [src]="featuredEvent.image" [alt]="'Imagen ilustrativa de ' + featuredEvent.title" />
+        <div class="spotlight-image-shade" aria-hidden="true"></div>
+        <span class="spotlight-label">SIEMPRE AL FRENTE · PRÓXIMO</span>
+      </div>
+      <div class="spotlight-copy">
+        <p class="event-kicker">{{ featuredEvent.eyebrow }}</p>
+        <h2>{{ featuredEvent.title }}</h2>
+        <p>{{ featuredEvent.description }}</p>
+        <div class="spotlight-meta"><span>{{ featuredEvent.date }}</span><span>{{ featuredEvent.location }}</span></div>
+        <a class="button button-red" [href]="eventContactUrl" target="_blank" rel="noopener noreferrer">CONSULTAR CARTELERA</a>
+      </div>
+    </article>
+
+    <div class="event-tabs" role="tablist" aria-label="Filtrar eventos">
+      <button type="button" role="tab" [attr.aria-selected]="activeTab() === 'upcoming'" [class.is-active]="activeTab() === 'upcoming'" (click)="setTab('upcoming')">PRÓXIMOS</button>
+      <button type="button" role="tab" [attr.aria-selected]="activeTab() === 'past'" [class.is-active]="activeTab() === 'past'" (click)="setTab('past')">PASADOS</button>
+    </div>
+
+    <div class="events-list-heading">
+      <div><p class="events-eyebrow"><span></span> {{ activeTab() === 'upcoming' ? 'LO QUE VIENE' : 'MEMORIA DEL EQUIPO' }}</p><h2>{{ activeTab() === 'upcoming' ? 'PRÓXIMOS CRUCES.' : 'EVENTOS PASADOS.' }}</h2></div>
+      <p>{{ activeTab() === 'upcoming' ? 'La cartelera se actualiza a medida que se confirman los cruces.' : 'Reviví algunos de los encuentros que compartimos.' }}</p>
+    </div>
+
+    @if (activeTab() === 'upcoming') {
+      <div class="upcoming-fight-list" aria-label="Próximos cruces">
+        @if (currentMuayBout(); as bout) {
+          <article class="upcoming-fight-card">
+            <div class="upcoming-fight-topline"><span>MUAY THAI · CRUCE {{ bout.number }}</span><b>{{ muayBoutIndex() + 1 }} / {{ muayBouts.length }}</b></div>
+            <div class="upcoming-fight-stage"><button type="button" class="fight-arrow fight-arrow-left" aria-label="Cruce anterior de Muay Thai" (click)="changeBout('muay-thai', -1)">‹</button><div class="upcoming-fight-body">
+              <div class="upcoming-athlete upcoming-athlete-red"><img [src]="bout.imageA" [alt]="'Imagen ilustrativa individual de ' + bout.fighterA" loading="lazy" /><div><strong>{{ bout.fighterA }}</strong><span>{{ bout.discipline === 'MUAY THAI' ? 'THAI KOMBAT' : 'PROMETEO MMA' }}</span></div></div>
+              <div class="upcoming-versus"><b>VS</b><span>{{ bout.detail }}</span></div>
+              <div class="upcoming-athlete upcoming-athlete-dark"><img [src]="bout.imageB" [alt]="'Imagen ilustrativa individual de ' + bout.fighterB" loading="lazy" /><div><strong>{{ bout.fighterB }}</strong><span>RIVAL A CONFIRMAR</span></div></div>
+            </div><button type="button" class="fight-arrow fight-arrow-right" aria-label="Siguiente cruce de Muay Thai" (click)="changeBout('muay-thai', 1)">›</button></div>
+            <div class="upcoming-fight-footer"><span>{{ featuredEvent.date }} · {{ featuredEvent.location }}</span><span>EN PREPARACIÓN</span></div>
+          </article>
+        }
+        @if (currentMmaBout(); as bout) {
+          <article class="upcoming-fight-card">
+            <div class="upcoming-fight-topline"><span>MMA · CRUCE {{ bout.number }}</span><b>{{ mmaBoutIndex() + 1 }} / {{ mmaBouts.length }}</b></div>
+            <div class="upcoming-fight-stage"><button type="button" class="fight-arrow fight-arrow-left" aria-label="Cruce anterior de MMA" (click)="changeBout('mma', -1)">‹</button><div class="upcoming-fight-body">
+              <div class="upcoming-athlete upcoming-athlete-red"><img [src]="bout.imageA" [alt]="'Imagen ilustrativa individual de ' + bout.fighterA" loading="lazy" /><div><strong>{{ bout.fighterA }}</strong><span>{{ bout.discipline === 'MUAY THAI' ? 'THAI KOMBAT' : 'PROMETEO MMA' }}</span></div></div>
+              <div class="upcoming-versus"><b>VS</b><span>{{ bout.detail }}</span></div>
+              <div class="upcoming-athlete upcoming-athlete-dark"><img [src]="bout.imageB" [alt]="'Imagen ilustrativa individual de ' + bout.fighterB" loading="lazy" /><div><strong>{{ bout.fighterB }}</strong><span>RIVAL A CONFIRMAR</span></div></div>
+            </div><button type="button" class="fight-arrow fight-arrow-right" aria-label="Siguiente cruce de MMA" (click)="changeBout('mma', 1)">›</button></div>
+            <div class="upcoming-fight-footer"><span>{{ featuredEvent.date }} · {{ featuredEvent.location }}</span><span>EN PREPARACIÓN</span></div>
+          </article>
+        }
+      </div>
+    } @else {
+      <div class="event-cards">
+        @for (event of visibleEvents(); track event.id) {
+          <button type="button" class="event-card" [class.is-selected]="selectedEventId() === event.id" (click)="selectEvent(event)">
+            <span class="event-card-date">{{ event.date }}</span>
+            <span class="event-card-title">{{ event.title }}</span>
+            <span class="event-card-location">{{ event.location }}</span>
+            <span class="event-card-action">{{ selectedEventId() === event.id ? 'SELECCIONADO' : 'VER CARTELERA' }}</span>
+          </button>
+        } @empty {
+          <p class="events-empty">Todavía no hay eventos cargados en esta categoría.</p>
+        }
+      </div>
+    }
+
+    @if (activeTab() === 'past') {
+    <article class="roster-section" aria-live="polite">
+      <div class="roster-heading">
+        <div><p class="events-eyebrow"><span></span> {{ selectedEvent().status === 'upcoming' ? 'CARTELERA EN PREPARACIÓN' : 'CARTELERA ARCHIVADA' }}</p><h2>PELEADORES <em>Y CRUCES.</em></h2></div>
+        <p>{{ selectedEvent().title }} · {{ selectedEvent().date }}<br><small>Los nombres se publican cuando cada cruce queda confirmado.</small></p>
+      </div>
+      <div class="bout-list">
+        @for (bout of selectedEvent().bouts; track bout.id) {
+          <article class="bout-card">
+            <div class="bout-topline"><span>CRUCE {{ bout.number }}</span><b>{{ bout.discipline }}</b><span>{{ bout.status }}</span></div>
+            <div class="bout-athletes">
+              <div class="athlete athlete-red"><img [src]="bout.imageA" [alt]="'Imagen ilustrativa de ' + bout.fighterA" loading="lazy" /><div><strong>{{ bout.fighterA }}</strong><span>Equipo Miguel Badone</span></div></div>
+              <span class="versus">VS</span>
+              <div class="athlete athlete-dark"><img [src]="bout.imageB" [alt]="'Imagen ilustrativa de ' + bout.fighterB" loading="lazy" /><div><strong>{{ bout.fighterB }}</strong><span>Participante a confirmar</span></div></div>
+            </div>
+            <div class="bout-footer"><span>{{ bout.detail }}</span><span class="bout-dot" aria-hidden="true"></span></div>
+          </article>
+        }
+      </div>
+      <div class="roster-note"><span aria-hidden="true">+</span><p>¿Querés participar de una próxima fecha? <a href="https://wa.me/5492494381035?text=Hola%20Miguel%2C%20quiero%20consultar%20por%20los%20pr%C3%B3ximos%20eventos%20y%20la%20cartelera." target="_blank" rel="noopener noreferrer">Escribile a Miguel para conocer las condiciones.</a></p></div>
+    </article>
+    }
+  </section>
+</main>
+
+<app-site-footer />

@@ -1,0 +1,92 @@
+
+  <header class="site-header" id="inicio">
+    <div class="container header-inner">
+      <a class="miguel-logo" href="#inicio" aria-label="Miguel Badone Combat Team, inicio">
+        <img src="assets/imagenes/logo4.jpeg" alt="Miguel Badone Combat Team" />
+      </a>
+      <span class="head-divider" aria-hidden="true"></span>
+      <span class="header-context">MUAY THAI <b>/</b> THAI KOMBAT</span>
+      <button class="mobile-menu-button" aria-controls="header-nav" [attr.aria-expanded]="menuOpen()" (click)="toggleMenu()" aria-label="Abrir navegación">☰</button>
+      <nav id="header-nav" class="header-nav" [class.is-open]="menuOpen()" (click)="closeMenu()" aria-label="Navegación principal">
+        <a href="#disciplina" (click)="scrollToSection('disciplina', $event)">La disciplina</a>
+        <a routerLink="/articulos" (click)="closeMenu()">Artículos</a>
+        <a href="#instructor" (click)="scrollToSection('instructor', $event)">Instructor</a>
+        <a class="button button-red button-small" [href]="contactUrl" target="_blank" rel="noopener noreferrer">QUIERO ENTRENAR <span>↗</span></a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-noise" aria-hidden="true"></div>
+      <div class="hero-diagonal hero-diagonal-one" aria-hidden="true"></div>
+      <div class="hero-diagonal hero-diagonal-two" aria-hidden="true"></div>
+      <div class="container hero-inner">
+        <div class="hero-copy">
+          <div class="eyebrow"><span></span> MIGUEL BADONE COMBAT TEAM <em> / </em> THAI KOMBAT</div>
+          <p class="hero-kicker">MUAY THAI · ENTRENAMIENTO EN TANDIL</p>
+          <h1 id="hero-title">LA FUERZA SE <span>ENTRENA.</span><br>LA DISCIPLINA SE <span>VIVE.</span></h1>
+          <p class="hero-description">Técnica, constancia y entrenamiento. Sumate a Thai Kombat, el equipo de Muay Thai de Miguel Badone.</p>
+          <div class="hero-buttons">
+            <a class="button button-red" [href]="contactUrl" target="_blank" rel="noopener noreferrer">CONSULTAR POR WHATSAPP <span>↗</span></a>
+            <a class="button button-outline" href="#horarios">VER HORARIOS <span>↓</span></a>
+          </div>
+          <div class="hero-tagline"><span class="tagline-icon">✦</span><span>EL PRIMER PASO ES PRESENTARTE.</span></div>
+        </div>
+        <div class="hero-art" aria-label="Imagen de referencia de Miguel Badone, de Thai Kombat">
+          <div class="hero-photo"></div>
+          <div class="hero-photo-gradient"></div>
+          <span class="vertical-type">COMBATE · TÉCNICA · DISCIPLINA</span>
+          <div class="hero-logo-sticker">
+            <img src="assets/thai-kombat-logo-ref.png" alt="Logotipo de Thai Kombat Vale Tudo, referencia provisional" />
+          </div>
+          <div class="hero-art-label"><span class="dot"></span> MIGUEL BADONE <b> / </b> INSTRUCTOR</div>
+        </div>
+      </div>
+      <div class="hero-bottom"><div class="container hero-bottom-inner"><span>01 / DISCIPLINA</span><span>MUAY THAI · THAI KOMBAT · TANDIL</span><a href="#disciplina">EXPLORAR ↓</a></div></div>
+    </section>
+
+    <div class="stat-bar"><div class="container stat-inner"><div class="stat"><strong>05</strong><span>DÍAS DE ENTRENAMIENTO<br><small>DE LUNES A VIERNES</small></span></div><div class="stat"><strong>03</strong><span>FRANJAS HORARIAS<br><small>MAÑANA · MEDIODÍA · NOCHE</small></span></div><div class="stat"><strong>01</strong><span>EQUIPO<br><small>THAI KOMBAT CON MIGUEL</small></span></div></div></div>
+
+    <section class="section intro-section" id="disciplina">
+      <div class="container intro-layout">
+        <div class="section-copy">
+          <p class="eyebrow"><span></span> 01 / NUESTRA DISCIPLINA</p>
+          <h2>MUCHO MÁS<br>QUE <em>GOLPEAR.</em></h2>
+          <p>El Muay Thai combina técnicas de puños, patadas, rodillas y codos. En Thai Kombat, cada entrenamiento es una oportunidad para trabajar la técnica, la condición física y la constancia.</p>
+          <p>¿Es tu primera clase? Escribile a Miguel para conocer el grupo y los requisitos para comenzar.</p>
+          <a class="text-link" href="https://www.instagram.com/thaikombatargentina/" target="_blank" rel="noopener noreferrer">CONOCÉ THAI KOMBAT EN INSTAGRAM <span>↗</span></a>
+        </div>
+        <div class="intro-features">
+          <article class="feature"><b>01</b><div><h3>TÉCNICA</h3><p>Trabajo de movimientos, combinaciones y fundamentos del Muay Thai.</p></div><span>↗</span></article>
+          <article class="feature"><b>02</b><div><h3>CONDICIÓN FÍSICA</h3><p>Sesiones que integran coordinación, resistencia y preparación física.</p></div><span>↗</span></article>
+          <article class="feature"><b>03</b><div><h3>DISCIPLINA</h3><p>Progreso a través de la práctica, el respeto y la constancia.</p></div><span>↗</span></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section schedule-section" id="horarios">
+      <div class="container">
+        <div class="section-heading-row"><div><p class="eyebrow"><span></span> 02 / PLANIFICÁ TU ENTRENAMIENTO</p><h2>HORARIOS <em>DE CLASES.</em></h2></div><div class="schedule-badge"><span class="live-dot"></span> PROGRAMACIÓN DESDE DICIEMBRE 2026</div></div>
+        <p class="schedule-subtitle">Tres opciones para adaptar el entrenamiento a tu rutina. Los horarios publicados corresponden a la programación informada para diciembre.</p>
+        <div class="schedule-grid">
+          @for (slot of discipline.schedule; track slot.id; let i = $index) {
+            <article class="time-card" [class.time-card-featured]="slot.id === 'evening'">
+              <span class="time-card-index">{{ (i + 1).toString().padStart(2, '0') }} / {{ slot.label }}</span>
+              <strong>{{ slot.start }}</strong><span class="time-dash">—</span><strong>{{ slot.end }}</strong>
+              <div class="time-card-bottom"><b>{{ slot.daysLabel }}</b><span>{{ slot.duration }}</span></div>
+            </article>
+          }
+        </div>
+        <div class="schedule-bottom"><p>¿TENÉS DUDAS SOBRE HORARIOS, CUPOS O VALORES?</p><a [href]="contactUrl" target="_blank" rel="noopener noreferrer">CONSULTALE A MIGUEL ↗</a></div>
+      </div>
+    </section>
+
+    <section class="section trainer-section" id="instructor"><div class="container trainer-layout"><div class="trainer-image"><img src="assets/miguel-badone-reference.webp" alt="Miguel Badone, instructor de Thai Kombat, imagen de referencia de Instagram" loading="lazy" /><div class="trainer-overlay">THAI KOMBAT<br><strong>INSTRUCTOR</strong></div></div><div class="trainer-copy"><p class="eyebrow"><span></span> 04 / CONOCÉ A TU INSTRUCTOR</p><h2>MIGUEL<br><em>BADONE.</em></h2><div class="trainer-rule"></div><p>Instructor de Thai Kombat y responsable de las propuestas de entrenamiento de Miguel Badone Combat Team. El entrenamiento propone aprender técnica y fortalecer la constancia.</p><div class="trainer-links"><a class="button button-red" [href]="contactUrl" target="_blank" rel="noopener noreferrer">HABLAR CON MIGUEL <span>↗</span></a><a class="button button-outline" href="https://www.instagram.com/thaikombatargentina/" target="_blank" rel="noopener noreferrer">INSTAGRAM <span>↗</span></a></div><p class="small-note">Fotografía tomada de la captura compartida, a reemplazar en la etapa de producción fotográfica.</p></div></div></section>
+
+    <section class="location-section" id="ubicacion"><div class="container location-layout"><div><p class="eyebrow"><span></span> 05 / DÓNDE ENTRENAMOS</p><h2>NOS VEMOS<br><em>EN EL EQUIPO.</em></h2><p>Paraguay 491, B7000 Tandil<br>Provincia de Buenos Aires, Argentina</p><a class="button button-outline" href="https://www.google.com/maps/search/?api=1&query=Paraguay+491%2C+Tandil%2C+Buenos+Aires%2C+Argentina" target="_blank" rel="noopener noreferrer">CÓMO LLEGAR <span>↗</span></a></div><div class="location-art"><span class="pin">⌖</span><span>PARAGUAY 491<br><strong>TANDIL · BUENOS AIRES</strong></span></div></div></section>
+
+    <section class="closing-cta"><div class="container closing-inner"><div><p class="eyebrow">THAI KOMBAT / MIGUEL BADONE COMBAT TEAM</p><h2>TU PRÓXIMO<br><em>ENTRENAMIENTO EMPIEZA ACÁ.</em></h2></div><a class="button button-light" [href]="contactUrl" target="_blank" rel="noopener noreferrer">ESCRIBIR POR WHATSAPP ↗</a></div></section>
+  </main>
+
+  <footer class="site-footer"><div class="container footer-inner"><a class="miguel-logo" href="#inicio" aria-label="Miguel Badone Combat Team, inicio"><img src="assets/imagenes/logo4.jpeg" alt="Miguel Badone Combat Team" /></a><p>Muay Thai · Thai Kombat · Tandil</p><div><a href="https://www.instagram.com/legionteamtandil/" target="_blank" rel="noopener noreferrer">INSTAGRAM DEL EQUIPO ↗</a><a href="https://www.instagram.com/thaikombatargentina/" target="_blank" rel="noopener noreferrer">INSTAGRAM THAI KOMBAT ↗</a></div></div></footer>
