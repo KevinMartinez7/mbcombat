@@ -28,7 +28,7 @@ interface ArticleVariant {
         <div class="page-container articles-hero-inner">
           <p class="eyebrow"><span></span> EQUIPAMIENTO DE COMBATE</p>
           <h1 id="articles-title">ARTÍCULOS <em>DE ENTRENAMIENTO.</em></h1>
-          <p>Protección, indumentaria y accesorios para entrenar. Consultá disponibilidad, talles y precio directamente con Miguel.</p>
+          <p>Protección y accesorios para entrenar. Consultá disponibilidad, talles y precio directamente con Miguel.</p>
         </div>
       </section>
       <section class="articles-catalog" aria-labelledby="catalog-title">
@@ -83,8 +83,8 @@ export class ArticlesPage {
     { name: 'Guantes', category: 'Protección', description: 'Guantes para práctica de striking y trabajo técnico.', position: 'product-guantes', sizes: ['S', 'M', 'L', 'XL'], variants: [{ name: 'Modelo 1', sheetClass: 'catalog-sheet-base' }, { name: 'Modelo 2', sheetClass: 'catalog-sheet-alt' }] },
     { name: 'Vendas', category: 'Entrenamiento', description: 'Vendas para acompañar el uso de guantes y proteger las manos.', position: 'product-vendas', variants: [{ name: 'Modelo disponible', sheetClass: 'catalog-sheet-base' }] },
     { name: 'Bucales', category: 'Protección', description: 'Bucales para sumar protección a tu entrenamiento.', position: 'product-bucales', variants: [{ name: 'Modelo disponible', sheetClass: 'catalog-sheet-base' }] },
-    { name: 'Shorts', category: 'Indumentaria', description: 'Shorts cómodos para entrenar con libertad de movimiento.', position: 'product-shorts', sizes: ['S', 'M', 'L', 'XL'], variants: [{ name: 'Modelo 1', sheetClass: 'catalog-sheet-base' }, { name: 'Modelo 2', sheetClass: 'catalog-sheet-alt' }] },
-    { name: 'Remeras', category: 'Indumentaria', description: 'Remeras deportivas para entrenar o usar todos los días.', position: 'product-remeras', sizes: ['S', 'M', 'L', 'XL', 'XXL'], variants: [{ name: 'Modelo 1', sheetClass: 'catalog-sheet-base' }, { name: 'Modelo 2', sheetClass: 'catalog-sheet-alt' }] },
+    { name: 'Inguinal', category: 'Protección', description: 'Protección inguinal para entrenar y competir con mayor seguridad.', position: 'product-inguinal', sizes: ['S', 'M', 'L', 'XL'], variants: [{ name: 'Modelo disponible', sheetClass: 'catalog-sheet-base' }] },
+    { name: 'Guantes de MMA', category: 'Protección', description: 'Guantes de MMA para golpeo, grappling y trabajo mixto.', position: 'product-guantes-mma', sizes: ['S', 'M', 'L', 'XL'], variants: [{ name: 'Modelo 1', sheetClass: 'catalog-sheet-base' }, { name: 'Modelo 2', sheetClass: 'catalog-sheet-alt' }] },
   ];
   readonly generalContactUrl = this.whatsappUrl('equipamiento de combate', 'modelos disponibles');
 
